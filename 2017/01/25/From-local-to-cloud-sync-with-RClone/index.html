@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>From local to cloud sync with RClone | Luciano Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="RClone (http://www.rclone.org) is a command line utility which enables to copy and sync data from and to famous cloud storage providers.
+The utility is available for Windows/Linux/Mac and supports ma">
+<meta property="og:type" content="article">
+<meta property="og:title" content="From local to cloud sync with RClone">
+<meta property="og:url" content="http://localhost/hexotest1/public/2017/01/25/From-local-to-cloud-sync-with-RClone/index.html">
+<meta property="og:site_name" content="Luciano Blog">
+<meta property="og:description" content="RClone (http://www.rclone.org) is a command line utility which enables to copy and sync data from and to famous cloud storage providers.
+The utility is available for Windows/Linux/Mac and supports ma">
+<meta property="og:image" content="http://localhost/hexotest1/public/postimg/rclone.png">
+<meta property="og:updated_time" content="2017-01-25T08:35:15.494Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="From local to cloud sync with RClone">
+<meta name="twitter:description" content="RClone (http://www.rclone.org) is a command line utility which enables to copy and sync data from and to famous cloud storage providers.
+The utility is available for Windows/Linux/Mac and supports ma">
+<meta name="twitter:image" content="http://localhost/hexotest1/public/postimg/rclone.png">
+  
+    <link rel="alternate" href="/hexotest1/public/atom.xml" title="Luciano Blog" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+
+    <!-- Bootstrap (readable template) -->
+    <link href="https://bootswatch.com/readable/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Customized blog css -->
+	<link href="css/myblog.css" rel="stylesheet">
+	
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/hexotest1/public/css/styles.css">
+  <link rel="stylesheet" href="/hexotest1/public/css/myblog.css">
+  
+
+</head>
+
+<body>
+  
+<nav class="navbar navbar-default navbar1">
+	<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  
+			</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			  <ul class="nav navbar-nav">
+				
+				  <li><a class=""
+						 href="https://www.quora.com">Quora</a></li>
+				
+				  <li><a class=""
+						 href="https://news.ycombinator.com/news">Hacker News</a></li>
+				
+				  <li><a class=""
+						 href="https://medium.com">Medium</a></li>
+							  
+				
+				<!-- 
+				<li class="dropdown">
+				  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Another action</a></li>
+					<li><a href="#">Something else here</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="#">Separated link</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="#">One more separated link</a></li>
+				  </ul>
+				</li>
+				 -->
+			  </ul>
+			  
+			  <!--
+			  <ul class="nav navbar-nav navbar-right">
+				
+				  <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+				
+			  </ul>
+			  -->
+
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="blog-header">
+  <h1 class="blog-title">Luciano Blog</h1>
+  
+    <p class="lead blog-description">Software Technologies</p>
+  
+</div>
+
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          <article id="post-From-local-to-cloud-sync-with-RClone" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h2 class="blog-post-title"  itemprop="name">
+      From local to cloud sync with RClone
+    </h2>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/hexotest1/public/2017/01/25/From-local-to-cloud-sync-with-RClone/" class="article-date"><time datetime="2017-01-25T08:30:40.000Z" itemprop="datePublished">2017-01-25</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#" class="image"><img src="postimg/rclone.png" alt=""></a></p>
+<p>RClone (<a href="http://www.rclone.org" target="_blank" rel="external">http://www.rclone.org</a>) is a command line utility which enables to copy and sync data from and to famous cloud storage providers.</p>
+<p>The utility is available for Windows/Linux/Mac and supports majors cloud storage providers like: Google Drive, Amazon S3, DropBox, Backblaze B2, etc.</p>
+<p>Copy a file to remote cloud is simple as <b>rclone copy c:\myFolder\myfile.txt remote:\backup</b> or synching a folder<br><b>rclone sync c:\myFolder remote:\backup</b></p>
+<p>Sync doesn’t transfer unchanged files, testing by size and modification time or MD5SUM.</p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://localhost/hexotest1/public/hexotest1/public/2017/01/25/From-local-to-cloud-sync-with-RClone/" data-id="ciycp0kl40003t4hsfzl1y94e" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/hexotest1/public/2017/01/25/Gmail-phishing-account/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">Gmail phishing account</span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+
+  
+</article>
+
+
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  <p>Pursuit positivity  and knowledge.</p>   
+
+</div>
+
+
+  
+
+
+  
+  <div class="sidebar-module">
+    <h4>Links</h4>
+    <ul class="sidebar-module-list">
+			<li><a href="https://daringfireball.net/projects/markdown/syntax">Markdown syntax</a></li>
+			<li><a href="https://hexo.io/docs/helpers.html">Hexo helpers</a></li>
+    </ul>
+  </div>
+
+
+  
+  <div class="sidebar-module">
+    <h4>Elsewhere</h4>
+    <ul class="sidebar-module-list">
+              <li><a href="https://github.com/lucnap">GitHub</a></li>
+              <li><a href="https://twitter.com/lucnap">Twitter</a></li>
+	</ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Archives</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/hexotest1/public/archives/2017/01/">January 2017</a><span class="sidebar-module-list-count">3</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/hexotest1/public/2017/01/25/From-local-to-cloud-sync-with-RClone/">From local to cloud sync with RClone</a>
+        </li>
+      
+        <li>
+          <a href="/hexotest1/public/2017/01/25/Gmail-phishing-account/">Gmail phishing account</a>
+        </li>
+      
+        <li>
+          <a href="/hexotest1/public/2017/01/24/CSS-child-and-adjacent-sibling-combinator/">CSS child and adjacent sibling combinator</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+  
+
+
+
+        </div>
+    </div>
+  </div>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Luciano - Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+<!--
+Blog template built with https://github.com/cgmartin/hexo-theme-bootstrap-blog and css from https://bootswatch.com/readable
+-->
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+<script src="/hexotest1/public/js/script.js"></script>
+
+</body>
+</html>
