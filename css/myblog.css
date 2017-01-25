@@ -39,6 +39,10 @@ h6, .h6 {
 	margin-bottom: 50px;
 }
 
+.article-entry img {
+    margin: auto auto auto 0px;
+}
+
 .sidebar-module-list-count {
 	margin-left: 10px;
 }
